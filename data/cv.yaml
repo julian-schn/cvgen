@@ -1,0 +1,104 @@
+# All CV content. Text fields: plain string (same in every language)
+# or a dict per language, e.g. { en: "...", de: "..." }.
+# Missing languages fall back to meta.default_lang.
+# Text supports Typst markup: *bold*, _italic_, #link("https://...")[text].
+# Dates: "YYYY-MM" or "YYYY" (quoted). end: null means "present".
+
+meta:
+  default_lang: en
+  languages: [en, de]
+
+labels:
+  present: { en: present, de: heute }
+  months:
+    en: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    de: [Jan., Feb., März, Apr., Mai, Juni, Juli, Aug., Sep., Okt., Nov., Dez.]
+
+person:
+  name: John Doe
+  title: { en: Computer Science Student, de: Informatikstudent }
+  email: john.doe@example.com
+  phone: "+49 000 0000000"
+  location: { en: Germany, de: Deutschland }
+  photo: null # e.g. assets/photo.jpg
+  links:
+    - { label: GitHub, url: "https://github.com/your-handle" }
+    - { label: LinkedIn, url: "https://linkedin.com/in/your-handle" }
+
+sections:
+  summary:
+    type: text
+    title: { en: Profile, de: Profil }
+    body:
+      en: Placeholder summary. Replace with two or three sentences about you.
+      de: Platzhalter-Zusammenfassung. Ersetze sie durch zwei bis drei Sätze über dich.
+
+  experience:
+    type: timeline
+    title: { en: Experience, de: Berufserfahrung }
+    items:
+      - id: example-job
+        role: { en: Working Student Software Development, de: Werkstudent Softwareentwicklung }
+        org: Example GmbH
+        location: { en: Munich, de: München }
+        start: "2024-03"
+        end: null
+        tags: [dev]
+        bullets:
+          - { en: Built *something* useful., de: Etwas *Nützliches* gebaut. }
+          - { en: Improved something else by 30%., de: Etwas anderes um 30 % verbessert. }
+      - id: example-internship
+        role: { en: Intern, de: Praktikant }
+        org: Other AG
+        start: "2023-03"
+        end: "2023-08"
+        tags: [dev]
+        bullets:
+          - { en: Placeholder bullet., de: Platzhalter. }
+
+  projects:
+    type: timeline
+    title: { en: Projects, de: Projekte }
+    items:
+      - id: cvgen
+        role: cvgen
+        org: { en: Personal project, de: Privates Projekt }
+        start: "2026"
+        tags: [dev]
+        bullets:
+          - { en: CV generator from YAML using Typst., de: CV-Generator aus YAML mit Typst. }
+
+  education:
+    type: timeline
+    title: { en: Education, de: Ausbildung }
+    items:
+      - id: bachelor
+        role: { en: B.Sc. Computer Science, de: B.Sc. Informatik }
+        org: { en: University of Applied Sciences, de: Hochschule }
+        start: "2022-10"
+        end: null
+        bullets:
+          - { en: "Focus: placeholder", de: "Schwerpunkt: Platzhalter" }
+
+  skills:
+    type: grouped
+    title: { en: Skills, de: Kenntnisse }
+    groups:
+      - name: { en: Languages, de: Sprachen }
+        items: [Python, TypeScript, Rust]
+      - name: Tools
+        items: [Git, Docker, Linux, Typst]
+
+  languages:
+    type: levels
+    title: { en: Languages, de: Sprachen }
+    items:
+      - { name: { en: German, de: Deutsch }, level: { en: Native, de: Muttersprache } }
+      - { name: { en: English, de: Englisch }, level: C1 }
+
+  interests:
+    type: list
+    title: { en: Interests, de: Interessen }
+    items:
+      - { en: Climbing, de: Klettern }
+      - { en: Photography, de: Fotografie }

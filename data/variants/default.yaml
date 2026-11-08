@@ -1,0 +1,15 @@
+# Order here = order in the PDF. Omit a section to hide it.
+# Entry forms:
+#   - experience                       # whole section
+#   - { id: projects, include_tags: [dev], limit: 3 }
+lang: en
+photo: false
+sections:
+  - summary
+  - experience
+  - projects
+  - education
+  - skills
+  - languages
+  - interests
+hide_items: []
