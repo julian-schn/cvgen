@@ -20,3 +20,5 @@ Raw command:
 ```sh
 typst compile --root . cv.typ out/cv.pdf --input variant=short --input lang=de
 ```
+
+Variant file names must not contain `-` (the Makefile splits `cv-<variant>-<lang>` on it).
