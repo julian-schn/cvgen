@@ -1,0 +1,10 @@
+# Jake's Resume layout: the classic one-page software engineering resume.
+theme: jake
+lang: en
+paper: a4 # or us-letter, like the LaTeX original
+sections:
+  - education
+  - experience
+  - projects
+  - { id: skills, title: { en: Technical Skills, de: Technische Kenntnisse } }
+hide_items: []

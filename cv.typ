@@ -4,8 +4,9 @@
 
 #import "template/sections.typ": render-section
 #import "template/themes/classic.typ" as classic
+#import "template/themes/jake.typ" as jake
 
-#let themes = (classic: classic)
+#let themes = (classic: classic, jake: jake)
 
 #let data = yaml("/" + sys.inputs.at("data", default: "data/cv.example.yaml"))
 #let variant-name = sys.inputs.at("variant", default: "default")
