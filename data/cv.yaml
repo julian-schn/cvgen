@@ -2,7 +2,7 @@
 # or a dict per language, e.g. { en: "...", de: "..." }.
 # Missing languages fall back to meta.default_lang.
 # Text supports Typst markup: *bold*, _italic_, #link("https://...")[text].
-# Dates: "YYYY-MM" or "YYYY" (quoted). end: null means "present".
+# Dates: "YYYY-MM" or "YYYY" (quoted). end: null = "present", omit end = single date.
 
 meta:
   default_lang: en
