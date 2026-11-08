@@ -18,21 +18,25 @@ make                                   # every variant × language into out/
 
 ## How it works
 
-- **`data/cv.yaml`** holds all content. A text field is either a plain string or one
+Everything lives in **one file**, `data/cv.yaml`: your content plus render presets.
+
+- **Content**: a text field is either a plain string or one
   value per language: `{ en: Experience, de: Berufserfahrung }`. A missing language
   falls back to `meta.default_lang`. Text can use Typst markup (`*bold*`, `#link(..)[..]`).
-- **`data/variants/*.yaml`** decide what goes into a PDF:
+- **Variants** (the `variants:` block at the bottom) decide what goes into each PDF:
 
   ```yaml
-  theme: jake            # classic | jake
-  lang: en
-  paper: a4              # or us-letter
-  sections:              # order here = order in the PDF; omitted = hidden
-    - education
-    - experience
-    - { id: projects, include_tags: [dev], limit: 3 }
-    - { id: skills, title: { en: Technical Skills } }
-  hide_items: [old-job]  # item ids to drop
+  variants:
+    jake:
+      theme: jake            # classic | jake
+      lang: en
+      paper: a4              # or us-letter
+      sections:              # order here = order in the PDF; omitted = hidden
+        - education
+        - experience
+        - { id: projects, include_tags: [dev], limit: 3 }
+        - { id: skills, title: { en: Technical Skills } }
+      hide_items: [old-job]  # item ids to drop
   ```
 
 - **Section types** set how a section renders: `text`, `timeline`, `grouped`, `levels`,
@@ -56,7 +60,7 @@ typst compile --root . cv.typ out/cv.pdf \
   --input data=data/cv.yaml --input variant=jake --input lang=en
 ```
 
-Variant file names must not contain `-` (the Makefile splits `cv-<variant>-<lang>` on it).
+Variant names must not contain `-` (the Makefile splits `cv-<variant>-<lang>` on it).
 
 ## Credits
 

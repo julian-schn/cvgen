@@ -142,3 +142,32 @@ sections:
     items:
       - { en: Climbing, de: Klettern }
       - { en: Film photography, de: Analogfotografie }
+
+# Render presets. Pick one with `--input variant=<name>` (default: default).
+# sections: order here = order in the PDF; omitted = hidden.
+#   entry forms: `- experience`  or  `- { id: projects, include_tags: [dev], limit: 3, title: {...} }`
+# hide_items: item ids to drop everywhere.
+# theme: classic | jake (CLI `--input theme=` overrides). paper: a4 | us-letter.
+variants:
+  default:
+    theme: classic
+    lang: en
+    sections: [summary, experience, projects, education, skills, languages, interests]
+
+  short: # one page, dev-focused
+    theme: classic
+    sections:
+      - experience
+      - { id: projects, include_tags: [dev], limit: 2 }
+      - education
+      - { id: skills, title: { en: Tech Stack, de: Tech-Stack } }
+    hide_items: [tutor]
+
+  jake: # Jake's Resume layout
+    theme: jake
+    paper: a4
+    sections:
+      - education
+      - experience
+      - projects
+      - { id: skills, title: { en: Technical Skills, de: Technische Kenntnisse } }

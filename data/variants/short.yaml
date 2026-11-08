@@ -1,9 +1,0 @@
-# One-page version: dev-focused, no interests.
-lang: en
-photo: false
-sections:
-  - experience
-  - { id: projects, include_tags: [dev], limit: 2 }
-  - education
-  - { id: skills, title: { en: Tech Stack, de: Tech-Stack } }
-hide_items: [tutor]

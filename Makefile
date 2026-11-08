@@ -1,7 +1,8 @@
-VARIANTS := $(basename $(notdir $(wildcard data/variants/*.yaml)))
 LANGS    := en de
 DATA     := $(if $(wildcard data/cv.yaml),data/cv.yaml,data/cv.example.yaml)
-SOURCES  := cv.typ $(wildcard template/themes/*.typ) $(wildcard template/*.typ) $(wildcard data/*.yaml) $(wildcard data/variants/*.yaml)
+# variant names = keys under the top-level `variants:` block
+VARIANTS := $(shell awk '/^variants:/{f=1;next} /^[^ \#]/{f=0} f && /^  [A-Za-z0-9_]+:/{sub(/^  /,"");sub(/:.*/,"");print}' $(DATA))
+SOURCES  := cv.typ $(wildcard template/themes/*.typ) $(wildcard template/*.typ) $(wildcard data/*.yaml)
 
 PDFS := $(foreach v,$(VARIANTS),$(foreach l,$(LANGS),out/cv-$(v)-$(l).pdf))
 

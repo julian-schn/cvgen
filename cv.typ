@@ -10,7 +10,12 @@
 
 #let data = yaml("/" + sys.inputs.at("data", default: "data/cv.example.yaml"))
 #let variant-name = sys.inputs.at("variant", default: "default")
-#let variant = yaml("/data/variants/" + variant-name + ".yaml")
+#let variants = data.at("variants", default: (default: (sections: data.sections.keys())))
+#assert(
+  variant-name in variants,
+  message: "unknown variant '" + variant-name + "'. Known: " + variants.keys().join(", "),
+)
+#let variant = variants.at(variant-name)
 
 #let theme-name = sys.inputs.at("theme", default: variant.at("theme", default: "classic"))
 #assert(
