@@ -62,6 +62,20 @@ typst compile --root . cv.typ out/cv.pdf \
 
 Variant names must not contain `-` (the Makefile splits `cv-<variant>-<lang>` on it).
 
+## Extending
+
+Need a section the example doesn't have, an extra field, or another template? See
+[AGENTS.md](AGENTS.md). In short:
+
+1. **New section** (awards, publications, …): add it under `sections` with an existing
+   `type` and list it in a variant. No template change.
+2. **New field** (e.g. `url` on projects): add it to the data, read it in every theme with a
+   `none` default.
+3. **New section type**: add a renderer to every theme in `template/themes/`.
+4. **New template**: copy a theme file, implement `apply`, `render-header`,
+   `section-heading` and `renderers`, register it in `cv.typ`. AGENTS.md has a mapping
+   guide for porting LaTeX templates.
+
 ## Credits
 
 The `jake` theme is a Typst port of [Jake's Resume](https://github.com/jakegut/resume)
