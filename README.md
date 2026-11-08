@@ -1,24 +1,64 @@
 # cvgen
 
-CV content lives in `data/cv.yaml`, rendered with Typst.
+Write your CV once in YAML and render it with [Typst](https://typst.app) in several
+languages, layouts and section selections.
 
-- `data/cv.yaml` — all content. Text fields are either a plain string or `{en: ..., de: ...}`.
-- `data/variants/*.yaml` — which sections appear, in which order, with optional item filters.
-- `template/` — Typst template (`theme.typ` for styling, `sections.typ` for section renderers).
+| `jake` theme | `classic` theme |
+| --- | --- |
+| ![jake](docs/preview-jake.png) | ![classic](docs/preview-classic.png) |
+
+## Quick start
+
+Requires [Typst](https://github.com/typst/typst) ≥ 0.13 and `make`.
+
+```sh
+cp data/cv.example.yaml data/cv.yaml   # your real data, gitignored
+make                                   # every variant × language into out/
+```
+
+## How it works
+
+- **`data/cv.yaml`** holds all content. A text field is either a plain string or one
+  value per language: `{ en: Experience, de: Berufserfahrung }`. A missing language
+  falls back to `meta.default_lang`. Text can use Typst markup (`*bold*`, `#link(..)[..]`).
+- **`data/variants/*.yaml`** decide what goes into a PDF:
+
+  ```yaml
+  theme: jake            # classic | jake
+  lang: en
+  paper: a4              # or us-letter
+  sections:              # order here = order in the PDF; omitted = hidden
+    - education
+    - experience
+    - { id: projects, include_tags: [dev], limit: 3 }
+    - { id: skills, title: { en: Technical Skills } }
+  hide_items: [old-job]  # item ids to drop
+  ```
+
+- **Section types** set how a section renders: `text`, `timeline`, `grouped`, `levels`,
+  `list`. A new section (awards, volunteering, …) only needs data, no template change.
+- **Themes** live in `template/themes/`. Each exports `apply`, `render-header`,
+  `section-heading` and `renderers`. Register a new one in `cv.typ`.
 
 ## Build
 
 ```sh
-make                      # all variants × languages into out/
-make de                   # all variants in German
-make one VARIANT=short LANG_=de
-make watch                # live preview of default/en
+make                              # all variants × languages
+make de                           # all variants in German
+make one VARIANT=jake LANG_=en    # a single PDF
+make watch VARIANT=jake           # live preview → out/cv-watch.pdf
 ```
 
-Raw command:
+Or directly:
 
 ```sh
-typst compile --root . cv.typ out/cv.pdf --input variant=short --input lang=de
+typst compile --root . cv.typ out/cv.pdf \
+  --input data=data/cv.yaml --input variant=jake --input lang=en
 ```
 
 Variant file names must not contain `-` (the Makefile splits `cv-<variant>-<lang>` on it).
+
+## Credits
+
+The `jake` theme is a Typst port of [Jake's Resume](https://github.com/jakegut/resume)
+by Jake Gutierrez (MIT), which is based on [sb2nov/resume](https://github.com/sb2nov/resume).
