@@ -1,7 +1,7 @@
-# Example CV content. Copy to data/cv.yaml (gitignored) and fill in your own;
-# the Makefile uses data/cv.yaml when it exists.
+# Example CV content for a fictional person. Copy to data/cv.yaml (gitignored)
+# and fill in your own; the Makefile uses data/cv.yaml when it exists.
 #
-# All CV content. Text fields: plain string (same in every language)
+# Text fields: plain string (same in every language)
 # or a dict per language, e.g. { en: "...", de: "..." }.
 # Missing languages fall back to meta.default_lang.
 # Text supports Typst markup: *bold*, _italic_, #link("https://...")[text].
@@ -18,46 +18,70 @@ labels:
     de: [Jan., Feb., März, Apr., Mai, Juni, Juli, Aug., Sep., Okt., Nov., Dez.]
 
 person:
-  name: Jane Doe
-  title: { en: Computer Science Student, de: Informatikstudent }
-  email: jane.doe@example.com
+  name: John Doe
+  title: { en: Software Engineer, de: Softwareentwickler }
+  email: john.doe@example.com
   phone: "+49 123 4567890"
-  location: { en: Germany, de: Deutschland }
+  location: { en: Berlin, Germany, de: Berlin, Deutschland }
   photo: null # e.g. assets/photo.jpg
   links:
-    - { label: GitHub, url: "https://github.com/janedoe" }
-    - { label: LinkedIn, url: "https://linkedin.com/in/janedoe" }
+    - { label: github.com/johndoe, url: "https://github.com/johndoe" }
+    - { label: linkedin.com/in/johndoe, url: "https://linkedin.com/in/johndoe" }
 
 sections:
   summary:
     type: text
     title: { en: Profile, de: Profil }
     body:
-      en: Placeholder summary. Replace with two or three sentences about you.
-      de: Platzhalter-Zusammenfassung. Ersetze sie durch zwei bis drei Sätze über dich.
+      en: >-
+        Backend-leaning software engineer with three years of experience building
+        web services in Python and TypeScript. Enjoys clean APIs, fast test suites
+        and making on-call boring.
+      de: >-
+        Backend-orientierter Softwareentwickler mit drei Jahren Erfahrung in
+        Webservices mit Python und TypeScript. Mag saubere APIs, schnelle Tests
+        und langweilige Rufbereitschaften.
 
   experience:
     type: timeline
     title: { en: Experience, de: Berufserfahrung }
     items:
-      - id: example-job
-        role: { en: Working Student Software Development, de: Werkstudent Softwareentwicklung }
-        org: Example GmbH
-        location: { en: Munich, de: München }
-        start: "2024-03"
+      - id: acme
+        role: { en: Software Engineer, de: Softwareentwickler }
+        org: Acme Logistics GmbH
+        location: Berlin
+        start: "2024-04"
         end: null
         tags: [dev]
         bullets:
-          - { en: Built *something* useful., de: Etwas *Nützliches* gebaut. }
-          - { en: Improved something else by 30%., de: Etwas anderes um 30 % verbessert. }
-      - id: example-internship
-        role: { en: Intern, de: Praktikant }
-        org: Other AG
-        start: "2023-03"
-        end: "2023-08"
+          - en: Built a shipment tracking API in *FastAPI* serving 2M requests/day at p99 < 120 ms.
+            de: Sendungsverfolgungs-API in *FastAPI* gebaut, 2 Mio. Anfragen/Tag bei p99 < 120 ms.
+          - en: Cut CI time from 25 to 8 minutes by parallelising tests and caching Docker layers.
+            de: CI-Laufzeit von 25 auf 8 Minuten gesenkt durch parallele Tests und Docker-Layer-Caching.
+          - en: Led the migration of three services from cron jobs to an event queue.
+            de: Migration von drei Services von Cronjobs auf eine Event-Queue geleitet.
+      - id: initech
+        role: { en: Working Student Software Development, de: Werkstudent Softwareentwicklung }
+        org: Initech AG
+        location: { en: Munich, de: München }
+        start: "2022-10"
+        end: "2024-03"
         tags: [dev]
         bullets:
-          - { en: Placeholder bullet., de: Platzhalter. }
+          - en: Developed internal React dashboards used by 40+ support staff.
+            de: Interne React-Dashboards für über 40 Support-Mitarbeitende entwickelt.
+          - en: Wrote integration tests that caught two billing bugs before release.
+            de: Integrationstests geschrieben, die zwei Abrechnungsfehler vor dem Release fanden.
+      - id: tutor
+        role: { en: Teaching Assistant, Algorithms, de: Tutor Algorithmen }
+        org: { en: Example University of Applied Sciences, de: Beispiel-Hochschule }
+        location: { en: Munich, de: München }
+        start: "2021-10"
+        end: "2022-07"
+        tags: [academic]
+        bullets:
+          - en: Ran weekly exercise sessions for 30 students and graded assignments.
+            de: Wöchentliche Übungen für 30 Studierende geleitet und Abgaben korrigiert.
 
   projects:
     type: timeline
@@ -65,12 +89,20 @@ sections:
     items:
       - id: cvgen
         role: cvgen
-        org: { en: Personal project, de: Privates Projekt }
         tech: Typst, YAML, Make
         start: "2026"
         tags: [dev]
         bullets:
-          - { en: CV generator from YAML using Typst., de: CV-Generator aus YAML mit Typst. }
+          - en: Generates multilingual CVs in several layouts from a single YAML file.
+            de: Erzeugt mehrsprachige Lebensläufe in mehreren Layouts aus einer YAML-Datei.
+      - id: tinykv
+        role: tinykv
+        tech: Rust, Raft
+        start: "2023"
+        tags: [dev]
+        bullets:
+          - en: Distributed key-value store with Raft consensus and a property-based test suite.
+            de: Verteilter Key-Value-Store mit Raft-Konsens und Property-based Tests.
 
   education:
     type: timeline
@@ -78,20 +110,24 @@ sections:
     items:
       - id: bachelor
         role: { en: B.Sc. Computer Science, de: B.Sc. Informatik }
-        org: { en: University of Applied Sciences, de: Hochschule }
-        start: "2022-10"
-        end: null
+        org: { en: Example University of Applied Sciences, de: Beispiel-Hochschule }
+        location: { en: Munich, de: München }
+        start: "2020-10"
+        end: "2024-03"
         bullets:
-          - { en: "Focus: placeholder", de: "Schwerpunkt: Platzhalter" }
+          - en: "Thesis: _Reducing tail latency in Python web services_ (grade 1.3)"
+            de: "Abschlussarbeit: _Tail-Latenz in Python-Webservices reduzieren_ (Note 1,3)"
 
   skills:
     type: grouped
     title: { en: Skills, de: Kenntnisse }
     groups:
       - name: { en: Languages, de: Sprachen }
-        items: [Python, TypeScript, Rust]
+        items: [Python, TypeScript, Rust, SQL]
+      - name: Frameworks
+        items: [FastAPI, React, Node.js]
       - name: Tools
-        items: [Git, Docker, Linux, Typst]
+        items: [Git, Docker, Kubernetes, PostgreSQL, Linux]
 
   languages:
     type: levels
@@ -105,4 +141,4 @@ sections:
     title: { en: Interests, de: Interessen }
     items:
       - { en: Climbing, de: Klettern }
-      - { en: Photography, de: Fotografie }
+      - { en: Film photography, de: Analogfotografie }
