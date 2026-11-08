@@ -1,3 +1,6 @@
+# Example CV content. Copy to data/cv.yaml (gitignored) and fill in your own;
+# the Makefile uses data/cv.yaml when it exists.
+#
 # All CV content. Text fields: plain string (same in every language)
 # or a dict per language, e.g. { en: "...", de: "..." }.
 # Missing languages fall back to meta.default_lang.
@@ -15,15 +18,15 @@ labels:
     de: [Jan., Feb., März, Apr., Mai, Juni, Juli, Aug., Sep., Okt., Nov., Dez.]
 
 person:
-  name: John Doe
+  name: Jane Doe
   title: { en: Computer Science Student, de: Informatikstudent }
-  email: john.doe@example.com
-  phone: "+49 000 0000000"
+  email: jane.doe@example.com
+  phone: "+49 123 4567890"
   location: { en: Germany, de: Deutschland }
   photo: null # e.g. assets/photo.jpg
   links:
-    - { label: GitHub, url: "https://github.com/your-handle" }
-    - { label: LinkedIn, url: "https://linkedin.com/in/your-handle" }
+    - { label: GitHub, url: "https://github.com/janedoe" }
+    - { label: LinkedIn, url: "https://linkedin.com/in/janedoe" }
 
 sections:
   summary:
@@ -63,6 +66,7 @@ sections:
       - id: cvgen
         role: cvgen
         org: { en: Personal project, de: Privates Projekt }
+        tech: Typst, YAML, Make
         start: "2026"
         tags: [dev]
         bullets:

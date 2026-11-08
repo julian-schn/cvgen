@@ -1,6 +1,7 @@
 VARIANTS := $(basename $(notdir $(wildcard data/variants/*.yaml)))
 LANGS    := en de
-SOURCES  := cv.typ $(wildcard template/*.typ) $(wildcard data/*.yaml) $(wildcard data/variants/*.yaml)
+DATA     := $(if $(wildcard data/cv.yaml),data/cv.yaml,data/cv.example.yaml)
+SOURCES  := cv.typ $(wildcard template/themes/*.typ) $(wildcard template/*.typ) $(wildcard data/*.yaml) $(wildcard data/variants/*.yaml)
 
 PDFS := $(foreach v,$(VARIANTS),$(foreach l,$(LANGS),out/cv-$(v)-$(l).pdf))
 
@@ -19,12 +20,13 @@ one: out/cv-$(VARIANT)-$(LANG_).pdf
 out/cv-%.pdf: $(SOURCES)
 	@mkdir -p out
 	typst compile --root . cv.typ $@ \
+		--input data=$(DATA) \
 		--input variant=$(word 1,$(subst -, ,$*)) \
 		--input lang=$(word 2,$(subst -, ,$*))
 
 watch:
 	@mkdir -p out
-	typst watch --root . cv.typ out/cv-watch.pdf --input variant=$(VARIANT) --input lang=$(LANG_)
+	typst watch --root . cv.typ out/cv-watch.pdf --input data=$(DATA) --input variant=$(VARIANT) --input lang=$(LANG_)
 
 clean:
 	rm -rf out

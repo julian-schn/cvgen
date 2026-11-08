@@ -1,4 +1,9 @@
 out/
+/*.pdf
 *.pdf
 *.png
+!docs/*.png
 .DS_Store
+
+# your real CV data stays local
+data/cv.yaml
